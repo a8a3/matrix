@@ -1,8 +1,13 @@
 #include <gtest/gtest.h>
+#include <matrix.hpp>
 
 // ------------------------------------------------------------------
 TEST(MatrixTest, MatrixTest) {
-    ASSERT_EQ(1, 1);
+    matrix<int, -1> m;
+    ASSERT_EQ(m.size(), 0);
+    m[0][0] = 100;
+    ASSERT_EQ(m.size(), 1);
+    ASSERT_EQ(m[0][0], 100);
 }
 
 // ------------------------------------------------------------------
