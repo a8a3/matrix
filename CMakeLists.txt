@@ -8,6 +8,7 @@ endif()
 
 find_package(Threads REQUIRED)
 find_package(GTest   REQUIRED)
+find_package(Boost   REQUIRED)
 
 add_executable(matrix       sources/matrix.cpp)
 add_executable(matrix_gtest tests/matrix_gtest.cpp)
@@ -19,11 +20,13 @@ set_target_properties(matrix PROPERTIES
 
 target_include_directories(matrix_gtest PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/sources
+    ${Boost_INCLUDE_DIRS}
 )
 
 target_link_libraries(matrix_gtest
     ${GTEST_BOTH_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT}
+    ${Boost_LIBRARIES}
 )
 
 if (MSVC)

@@ -11,35 +11,33 @@
 //     ASSERT_EQ(m[0][0], 100);
 // }
 
-#define PRINT_RANGE(_x_) for(const auto& i: (_x_)) {\
-                             std::cout << i << " "; \
-                         }                          \
-                         std::cout << std::endl;    \
-
-template<typename T>
-struct ST {
-    ST() = default;
-    template<typename TT = T, std::enable_if_t<!std::is_const<TT>::value, int> = 0>
-    void f() {
-        std::cout << "f1" << std::endl;
-    }
-    template<typename TT = T, std::enable_if_t<std::is_const<TT>::value, int> = 0>
-    void f() {
-        std::cout << "f2" << std::endl;
-    }
-
-};
-
 // ------------------------------------------------------------------
-TEST(MatrixTest, MatrixTest) {
-    matrix<int, -1> m;
- // m[10][20] = 100;
-    ASSERT_EQ(m[10][21],  -1);
+TEST(MatrixTest, MatrixFunctionalityTest) {
+    constexpr auto def = -1;
 
-    ST<const std::string> s;
-    s.f();
+    matrix<int, 2, def> m;
+    // m[0][0] = 100;
+    // ASSERT_EQ(m[0][0], 100);
+    // ASSERT_EQ(m.size(), 1);
+    
+    // m[0][0] = def;
+    // ASSERT_EQ(m[0][0], def);
+    // ASSERT_EQ(m.size(), 0);
+
+    m[0][0] = 200;
+    ASSERT_EQ(m[0][0], 100);
+    // ASSERT_EQ(m[0][1], 200);
+    // ASSERT_EQ(m[0][2], 300);
+    
+    // auto it = m.begin();
+    // ASSERT_EQ(*it, std::make_tuple(0, 0, 100));
+    // ++it;
+    // ASSERT_EQ(*it, std::make_tuple(0, 1, 200));
+    // ++it;
+    // ASSERT_EQ(*it, std::make_tuple(0, 2, 300));
 
 
+ //   ASSERT_EQ(m[100][100], -1);
 }
 
 
