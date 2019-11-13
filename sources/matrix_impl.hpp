@@ -24,7 +24,6 @@ public:
    ~storage() = default;
    
     storage& operator[](size_t ind) {
-        std::cout << __PRETTY_FUNCTION__ << std::endl;
         if (ind_token_ >= N) {
             throw std::out_of_range("incorrect index passed");
         }
@@ -34,9 +33,7 @@ public:
     }
     
     operator T() const {
-        std::cout << __PRETTY_FUNCTION__ << std::endl;
         if (ind_token_ != N) {
-            std::cout << "ind token: " << ind_token_ << std::endl;
             throw std::out_of_range("incorrect index passed");
         }
     
@@ -47,32 +44,21 @@ public:
         return it == data_.end() ? def : it->second;
     }
 
-    bool operator== (const T& val) const {
-        std::cout << __PRETTY_FUNCTION__ << std::endl;
-        if (ind_token_ != N) {
-            std::cout << "ind token: " << ind_token_ << std::endl;
-            throw std::out_of_range("incorrect index passed");
-        }
-    
-        std::cout << "0" << std::endl;
-        auto it = data_.find(ind_);
-        std::cout << "1" << std::endl;
-        ind_token_ = 0;
-        std::cout << "2" << std::endl;
-        ind_ = {0};
-        std::cout << "3" << std::endl;
+//    bool operator== (const T& val) const {
+//        if (ind_token_ != N) {
+//            throw std::out_of_range("incorrect index passed");
+//        }
+//        auto it = data_.find(ind_);
+//        ind_token_ = 0;
+//        ind_ = {0};
+//
+//        if (it == data_.end()) {
+//            return false;
+//        }
+//        return it->second == val;
+//    }
 
-        if (it == data_.end()) {
-        std::cout << "4" << std::endl;
-            return false;
-        }
-        std::cout << "5" << std::endl;
-        return it->second == val;
-    }
-    
     storage& operator= (const T& val) {
-        std::cout << __PRETTY_FUNCTION__ << std::endl;
-        std::cout << "val: " << val << std::endl;
         if (ind_token_ != N) {
             throw std::out_of_range("incorrect index passed");
         }
@@ -97,14 +83,14 @@ public:
 private:
     mutable storage_index ind_{0};
     mutable size_t ind_token_{0};
-    storage_impl data_; 
+    storage_impl data_;
 };
  
 template<typename T, size_t N, const T def>
 class matrix_iterator;
  
 // ------------------------------------------------------------------
-template<typename T, size_t N, const T def = T()>
+template<typename T, size_t N, const T def>
 class matrix {
     storage<T, N, def> s_;
     
